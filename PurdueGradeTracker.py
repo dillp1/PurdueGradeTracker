@@ -29,11 +29,20 @@ def get_main_menu_choice():
 
 
 def save_semester_to_file(semester):
-    # get folder name
+    # get folder and file names
     folder_name = semester.semester_name
+    file_name = folder_name + ".txt"
 
     # create file directory for semester
     os.mkdir(folder_name)
+
+    # create file path
+    file_path = os.path.join(folder_name, file_name)
+
+    # write new file to store semester data
+    with open(file_path, "w") as file:
+        file.write(semester.semester_name)
+
     print(f"{semester.semester_name} semester has been registered!")
 
 
