@@ -32,7 +32,7 @@ def get_semester_choice():
     # gather input
     choice = input("Enter Semester: ")
 
-    #input validation
+    # input validation
     if not os.path.exists(choice):
         print("Semester does not exist.")
         return
@@ -57,6 +57,10 @@ def register_semester():
     else:
         semester = Semester(semester_name)
         semester.save_semester_to_file()
+
+
+def register_class():
+    return 0
 
 
 def main():
