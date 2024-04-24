@@ -6,4 +6,4 @@ This is my first project using Git, GitHub, and my first python project that is 
 
 Progress:
 
-4/24/24 - Project Initialization
+4/24/24 - Project Initialization, added Semester write-to-file functionality
