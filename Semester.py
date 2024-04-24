@@ -21,5 +21,3 @@ class Semester:
         # write new file to store semester data
         with open(file_path, "w") as file:
             file.write(self.semester_name)
-
-        print(f"{self.semester_name} semester has been registered!")

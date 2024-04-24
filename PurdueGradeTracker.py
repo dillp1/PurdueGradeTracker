@@ -1,11 +1,12 @@
 import os
 from Semester import Semester
+from Course import Course
 
 
 def print_main_menu():
     print("Menu:")
     print("1. Add Grade")
-    print("2. Register Class")
+    print("2. Register Course")
     print("3. Register Semester")
     print("4. Exit")
 
@@ -29,15 +30,18 @@ def get_main_menu_choice():
 
 
 def get_semester_choice():
-    # gather input
-    choice = input("Enter Semester: ")
+    while True:
+        # gather input
+        choice = input("Enter Semester: ")
 
-    # input validation
-    if not os.path.exists(choice):
-        print("Semester does not exist.")
-        return
+        # build file path
+        file_path = os.path.join("Semesters", choice)
 
-    return choice
+        # input validation
+        if not os.path.exists(file_path):
+            print("Semester does not exist.")
+        else:
+            return choice
 
 
 def register_semester():
@@ -46,7 +50,7 @@ def register_semester():
         os.mkdir("Semesters")
 
     # prompt for input
-    semester_name = input("Enter semester name: ")
+    semester_name = input("Enter Semester Name: ")
     # capitalize for clarity
     semester_name = semester_name.capitalize()
 
@@ -57,10 +61,24 @@ def register_semester():
     else:
         semester = Semester(semester_name)
         semester.save_semester_to_file()
+        print(f"{semester_name} semester has been registered!")
 
 
-def register_class():
-    return 0
+def register_course():
+    # prompt for input
+    semester = get_semester_choice()
+
+    # prompt for course name
+    course_name = input("Enter Course Name: ")
+
+    # construct file path
+    file_path = os.path.join("Semesters", semester, course_name)
+
+    if os.path.exists(file_path):
+        print("Course already exist.")
+    else:
+        course = Course(course_name)
+        print("Course registered!")
 
 
 def main():
@@ -76,9 +94,9 @@ def main():
         if choice == 1:
             return 0
 
-        # choice 2 - Register Class
+        # choice 2 - Register Course
         elif choice == 2:
-            return 0
+            register_course()
 
         # choice 3 - Register Semester
         elif choice == 3:
