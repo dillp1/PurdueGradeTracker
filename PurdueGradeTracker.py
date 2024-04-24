@@ -44,11 +44,18 @@ def get_semester_choice():
             return choice
 
 
-def register_semester():
-    # check if Semesters directory does not exist
-    if not os.path.exists("Semesters"):
-        os.mkdir("Semesters")
+def get_credit_hours():
+    while True:
+        # gather input
+        credit_hours = int(input("Enter Credit Hours: "))
 
+        if credit_hours < 0:
+            print("Credit Hours cannot be negative.")
+        else:
+            return credit_hours
+
+
+def register_semester():
     # prompt for input
     semester_name = input("Enter Semester Name: ")
     # capitalize for clarity
@@ -66,23 +73,37 @@ def register_semester():
 
 def register_course():
     # prompt for input
-    semester = get_semester_choice()
+    semester_name = get_semester_choice()
 
     # prompt for course name
     course_name = input("Enter Course Name: ")
 
     # construct file path
-    file_path = os.path.join("Semesters", semester, course_name)
+    file_path = os.path.join("Semesters", semester_name, course_name)
 
     if os.path.exists(file_path):
         print("Course already exist.")
     else:
         course = Course(course_name)
+        semester = Semester(semester_name)
+        semester.add_course_to_semester(course)
         print("Course registered!")
 
 
 def main():
     print("Welcome to Purdue Grade Tracker!")
+
+    # build list of semesters
+    semesters = []
+    current_directory = "Semesters"
+
+    if not os.path.exists(current_directory):
+        os.mkdir(current_directory)
+
+    all_semesters = os.listdir(current_directory)
+    for semester in all_semesters:
+        if os.path.isdir(os.path.join(current_directory, semester)):
+            semesters.append(semester)
 
     # main loop
     while True:

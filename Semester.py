@@ -20,4 +20,7 @@ class Semester:
 
         # write new file to store semester data
         with open(file_path, "w") as file:
-            file.write(self.semester_name)
+            file.write(self.semester_name + "\n")
+
+    def add_course_to_semester(self, course):
+        self.courses.append(course)
