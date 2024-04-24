@@ -1,3 +1,6 @@
+from Semester import Semester
+
+
 def print_main_menu():
     print("Menu:")
     print("1. Add Grade")
