@@ -1,3 +1,4 @@
+import os
 from Semester import Semester
 
 
@@ -27,6 +28,30 @@ def get_main_menu_choice():
             print_main_menu()
 
 
+def save_semester_to_file(semester):
+    # get folder name
+    folder_name = semester.semester_name
+
+    # create file directory for semester
+    os.mkdir(folder_name)
+    print(f"{semester.semester_name} semester has been registered!")
+
+
+def register_semester():
+    # prompt for input
+    semester_name = input("Enter semester name: ")
+    # capitalize for clarity
+    semester_name = semester_name.capitalize()
+
+    # check that semester is not registered
+    if os.path.exists(semester_name):
+        print("Semester already registered.")
+    # save semester
+    else:
+        semester = Semester(semester_name)
+        save_semester_to_file(semester)
+
+
 def main():
     print("Welcome to Purdue Grade Tracker!")
 
@@ -46,7 +71,7 @@ def main():
 
         # choice 3 - Register Semester
         elif choice == 3:
-            return 0
+            register_semester()
 
         # choice 4 - Quit
         else:
