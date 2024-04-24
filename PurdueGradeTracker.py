@@ -28,6 +28,18 @@ def get_main_menu_choice():
             print_main_menu()
 
 
+def get_semester_choice():
+    # gather input
+    choice = input("Enter Semester: ")
+
+    #input validation
+    if not os.path.exists(choice):
+        print("Semester does not exist.")
+        return
+
+    return choice
+
+
 def register_semester():
     # check if Semesters directory does not exist
     if not os.path.exists("Semesters"):
