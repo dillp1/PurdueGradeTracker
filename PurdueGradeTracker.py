@@ -28,25 +28,6 @@ def get_main_menu_choice():
             print_main_menu()
 
 
-def save_semester_to_file(semester):
-    # get folder and file names
-    folder_name = semester.semester_name
-    file_name = folder_name + ".txt"
-
-    # create file directory for semester
-    semester_directory = os.path.join("Semesters", folder_name)
-    os.mkdir(semester_directory)
-
-    # create file path
-    file_path = os.path.join(semester_directory, file_name)
-
-    # write new file to store semester data
-    with open(file_path, "w") as file:
-        file.write(semester.semester_name)
-
-    print(f"{semester.semester_name} semester has been registered!")
-
-
 def register_semester():
     # check if Semesters directory does not exist
     if not os.path.exists("Semesters"):
@@ -63,7 +44,7 @@ def register_semester():
     # save semester
     else:
         semester = Semester(semester_name)
-        save_semester_to_file(semester)
+        semester.save_semester_to_file()
 
 
 def main():
