@@ -34,10 +34,11 @@ def save_semester_to_file(semester):
     file_name = folder_name + ".txt"
 
     # create file directory for semester
-    os.mkdir(folder_name)
+    semester_directory = os.path.join("Semesters", folder_name)
+    os.mkdir(semester_directory)
 
     # create file path
-    file_path = os.path.join(folder_name, file_name)
+    file_path = os.path.join(semester_directory, file_name)
 
     # write new file to store semester data
     with open(file_path, "w") as file:
@@ -47,13 +48,17 @@ def save_semester_to_file(semester):
 
 
 def register_semester():
+    # check if Semesters directory does not exist
+    if not os.path.exists("Semesters"):
+        os.mkdir("Semesters")
+
     # prompt for input
     semester_name = input("Enter semester name: ")
     # capitalize for clarity
     semester_name = semester_name.capitalize()
 
     # check that semester is not registered
-    if os.path.exists(semester_name):
+    if os.path.exists("Semesters/" + semester_name):
         print("Semester already registered.")
     # save semester
     else:
