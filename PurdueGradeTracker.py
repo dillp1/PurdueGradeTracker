@@ -4,7 +4,7 @@ from Course import Course
 
 
 def print_main_menu():
-    print("Menu:")
+    print("Main Menu:")
     print("1. Add Grade")
     print("2. Register Course")
     print("3. Register Semester")
@@ -72,11 +72,11 @@ def register_semester():
 
 
 def register_course():
-    # prompt for input
+    # prompt for semester
     semester_name = get_semester_choice()
 
     # prompt for course name
-    course_name = input("Enter Course Name: ")
+    course_name = input("Enter Course Name: ") + '.txt'
 
     # construct file path
     file_path = os.path.join("Semesters", semester_name, course_name)
@@ -86,7 +86,10 @@ def register_course():
     else:
         course = Course(course_name)
         semester = Semester(semester_name)
+
         semester.add_course_to_semester(course)
+        course.save_course_to_file(file_path)
+
         print("Course registered!")
 
 
