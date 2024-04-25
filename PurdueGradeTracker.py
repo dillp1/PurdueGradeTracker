@@ -72,6 +72,11 @@ def register_semester():
 
 
 def register_course():
+    # check that at least one semester has been registered
+    if not os.path.exists('Semesters'):
+        print("No semesters have been registered yet.")
+        return
+
     # prompt for semester
     semester_name = get_semester_choice()
 
@@ -95,18 +100,6 @@ def register_course():
 
 def main():
     print("Welcome to Purdue Grade Tracker!")
-
-    # build list of semesters
-    semesters = []
-    current_directory = "Semesters"
-
-    if not os.path.exists(current_directory):
-        os.mkdir(current_directory)
-
-    all_semesters = os.listdir(current_directory)
-    for semester in all_semesters:
-        if os.path.isdir(os.path.join(current_directory, semester)):
-            semesters.append(semester)
 
     # main loop
     while True:
